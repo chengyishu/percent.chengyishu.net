@@ -3,6 +3,8 @@ $(function () {
     $('#addRight').on('click', function () {
         var rightCount = parseInt(localStorage.getItem('rightCount'));
         localStorage.setItem('rightCount', rightCount + 1);
+        $('#rightAudio')[0].currentTime = 0;
+        $('#rightAudio')[0].play();
         render();
         // location.reload();
     });
@@ -10,15 +12,19 @@ $(function () {
     $('#addWrong').on('click', function () {
         var wrongCount = parseInt(localStorage.getItem('wrongCount'));
         localStorage.setItem('wrongCount', wrongCount + 1);
+        $('#wrongAudio')[0].currentTime = 0;
+        $('#wrongAudio')[0].play();
         render();
         // location.reload();
     });
     // 重置
     $('#resetArea').on('click', function () {
-        localStorage.setItem('rightCount', 0);
-        localStorage.setItem('wrongCount', 0);
-        // render();
-        location.reload();
+        if (confirm("重置将清空当前分数，确定要重置吗？")) {
+            localStorage.setItem('rightCount', 0);
+            localStorage.setItem('wrongCount', 0);
+            // render();
+            location.reload();
+        }
     });
 
     render();
